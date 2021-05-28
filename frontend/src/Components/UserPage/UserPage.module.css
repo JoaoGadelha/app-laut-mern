@@ -5,7 +5,6 @@
 
 .dadosUsuario {
     border: solid black 1px;
-    width: 300px;
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0 5px 5px rgba(0,0,0,0.5);
@@ -13,7 +12,7 @@
     font-weight: bold;
     display:grid;
     justify-items: left;
-    padding-left: 30px;
+    padding-left: 10px;
 }
 
 .dadosUsuario > * > * {
