@@ -7,7 +7,12 @@ const Login = () => {
   return (
     <div className={styles.container}>
       <LoginForm />
-      <Link to="/signup">Signup</Link>
+      <div className={styles.linkBox}>
+        <h1>Não possui uma conta? Crie aqui:</h1>
+        <Link className={styles.Link} to="/signup">
+          Signup
+        </Link>
+      </div>
     </div>
   );
 };

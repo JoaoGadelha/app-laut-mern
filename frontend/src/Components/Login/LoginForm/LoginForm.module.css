@@ -1,5 +1,32 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.input {
+  border: 0;
+  border-bottom: solid rgb(170, 170, 170) 1px;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+
+.button {
+  background: green;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  border-radius: 20px;
+  padding: 10px 0;
+  border: 0;
+  transition: ease all 0.3s;
+  cursor: pointer;
+  box-shadow:0;
+  width: 300px;
+}
+
+.button:hover {
+    transform: translateY(10px);
+    box-shadow: 10px 10px 10px rgb(0, 128, 0, 0.5);
+    color: black;
 }

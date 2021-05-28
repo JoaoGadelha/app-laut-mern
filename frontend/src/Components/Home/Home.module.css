@@ -1,0 +1,28 @@
+.container {
+    display: grid;
+    place-items: center;
+}
+
+.linkContainer {
+    margin-top:50px;
+}
+
+.Link {
+    font-weight: bold;
+    font-size: 20px;
+    background: rgb(213, 213, 252);
+    padding: 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: blue;
+    display: block;
+    width: 50px;
+    transition: ease all 0.3s;
+}
+
+.Link:hover {
+    transform:translateY(10px);
+    box-shadow: 10px 10px 10px rgba(170, 170, 214, 0.5);
+    color: rgb(0, 0, 105);
+}
+

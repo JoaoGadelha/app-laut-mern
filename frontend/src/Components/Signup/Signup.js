@@ -7,7 +7,7 @@ const Signup = () => {
   return (
     <div className={styles.container}>
       <SignupForm />
-      <Link to="/login">Login</Link>
+      <Link className={styles.Link} to="/login">Login</Link>
     </div>
   );
 };

@@ -18,7 +18,7 @@ authUser.post("/", async (req, res) => {
       return res.json({ message: "-1" });
     } else {
       if (userData[0].senha !== req.body.senha) {
-        // senha errado
+        // senha errada
         return res.json({ message: "-2" });
       } else {
         return res.json({
