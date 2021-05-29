@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styles from "./SignupForm.module.css";
 import { postData } from "./postData";
+import loading from "./loading.svg";
 
 const LoginForm = () => {
   let [nome, setNome] = useState("");
@@ -10,20 +11,62 @@ const LoginForm = () => {
   let [curso, setCurso] = useState("");
   let [senha, setSenha] = useState("");
   let [senha2, setSenha2] = useState("");
+  let [alert, setAlert] = useState("");
+  let [displayAlert, setDisplayAlert] = useState(false);
+  let [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
 
+  function validateEmail(mail) {
+    if (
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+        mail
+      )
+    ) {
+      return true;
+    }
+    return false;
+  }
+
   const onClickHandler = async () => {
-    let url = "https://app-laut.herokuapp.com/createUser";
-    let data = {
-      email: email,
-      senha: senha,
-      nome: nome,
-      sobrenome: sobrenome,
-      curso: curso,
-    };
-    if (senha === senha2) {
-      let response = await postData(url, data);
-      history.push("/login");
+    setDisplayAlert(false);
+    if (
+      nome === "" ||
+      sobrenome === "" ||
+      email === "" ||
+      curso === "" ||
+      senha === "" ||
+      senha2 === ""
+    ) {
+      setAlert("Por favor, preencha todos os campos");
+      setDisplayAlert(true);
+    } else {
+      if (!validateEmail(email)) {
+        setDisplayAlert(true);
+        setAlert("Por favor, insira um e-mail válido");
+      } else {
+        if (senha.length < 8) {
+          setDisplayAlert(true);
+          setAlert("A senha deve conter mais de 8 caracteres");
+        } else {
+          if (senha != senha2) {
+            setDisplayAlert(true);
+            setAlert("Ambas as senhas devem ser iguais");
+          } else {
+            setIsLoading(true);
+            let url = "https://app-laut.herokuapp.com/createUser";
+            let data = {
+              email: email,
+              senha: senha,
+              nome: nome,
+              sobrenome: sobrenome,
+              curso: curso,
+            };
+            await postData(url, data);
+            setIsLoading(false);
+            history.push("/login");
+          }
+        }
+      }
     }
   };
 
@@ -66,7 +109,12 @@ const LoginForm = () => {
         placeholder="Insira novamente sua senha..."
         value={senha2}
         onChange={(e) => setSenha2(e.target.value)}
-      ></input>
+      ></input>{isLoading && (
+        <div className={styles.imgContainer}>
+          <img src={loading} style={{ width: "100px" }}></img>
+        </div>
+      )}
+      {displayAlert && <h2 style={{ color: "red" }}>{alert}</h2>}
       <button className={styles.button} onClick={onClickHandler}>
         Signup
       </button>
