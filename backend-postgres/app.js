@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const Pool = require("pg").Pool;
+require("dotenv").config();
 
 // nao utilizar em producao. compromete a seguranca da aplicacao
 process.env.NODE_TLS_REJECT_UNAUTHORIZED='0'
@@ -31,6 +32,6 @@ app.get("/getUser", (req, res) => {
   });
 });
 
-app.listen(8000, () => {
+app.listen(process.env.PORT, () => {
   console.log(`Server is running.`);
 });
