@@ -44,8 +44,6 @@ app.post("/authUser", (req, res) => {
         throw error;
       }
       
-      console.log(senha === results.rows[0].senha)
-
       if (results.rows[0] !== undefined && senha === results.rows[0].senha) {
         return res.status(200).json({
           code: "loggedin",
@@ -53,14 +51,15 @@ app.post("/authUser", (req, res) => {
         });
       }
 
-      if (results.rows.length === 0) {
+      console.log(results.rows)
+      if (results.rows[0] === undefined) {
         return res.json({
           code: "userdoesntexist",
           message: "Usuário não existe",
         });
       }
 
-      if (results.rows[0] === undefined || senha !== results.rows[0].senha) {
+      if ( senha !== results.rows[0].senha) {
         return res.json({
           code: "wrongpassword",
           message: "Usuario ou senha errados",
