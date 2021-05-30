@@ -43,7 +43,7 @@ app.post("/authUser", (req, res) => {
       if (error) {
         throw error;
       }
-      
+
       if (results.rows[0] !== undefined && senha === results.rows[0].senha) {
         return res.status(200).json({
           code: "loggedin",
@@ -58,7 +58,7 @@ app.post("/authUser", (req, res) => {
         });
       }
 
-      if ( senha !== results.rows[0].senha) {
+      if (senha !== results.rows[0].senha) {
         return res.json({
           code: "wrongpassword",
           message: "Usuario ou senha errados",
@@ -74,17 +74,17 @@ app.post("/createUser", (req, res) => {
   let senha = String(req.body.senha);
   let nome = String(req.body.nome);
   let sobrenome = String(req.body.sobrenome);
-  let id = String(req.body.id);
+  let id = Math.floor(Math.random() * 1000000);
   let curso = String(req.body.curso);
 
   pool.query(
     "INSERT INTO users (id,nome,sobrenome,email,senha,curso) VALUES ($1,$2,$3,$4,$5,$6)",
-    [ id, nome, sobrenome, email, senha, curso],
+    [id, nome, sobrenome, email, senha, curso],
     (error, results) => {
       if (error) {
         throw error;
       }
-      res.json(results)
+      return res.json(results.rows);
     }
   );
 });
