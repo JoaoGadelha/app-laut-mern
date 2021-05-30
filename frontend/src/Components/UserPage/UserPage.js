@@ -12,9 +12,10 @@ const UserPage = () => {
     const id = url.substring(url.lastIndexOf("/") + 1);
     (async () => {
       let serverRes = await fetch(
-        "https://app-laut.herokuapp.com/getUser/" + id
+        "https://app-laut-pern.herokuapp.com/getUser/" + id
       );
-      setResponse(await serverRes.json());
+      let jsonRes = await serverRes.json();
+      setResponse(jsonRes[0]);
     })();
   }, []);
 

@@ -16,22 +16,32 @@ const LoginForm = () => {
   const onClickHandler = async () => {
     setDisplayAlert(false);
     setIsLoading(true);
-    let url = "https://app-laut.herokuapp.com/authUser";
+    // acessa banco de dados no mondogb atlas
+    //let url = "https://app-laut.herokuapp.com/authUser";
+
+    let url = "https://app-laut-pern.herokuapp.com/authUser";
     let data = { email: email, senha: senha };
     let response = await postData(url, data);
     setIsLoading(false);
-    if (response.message === "loggedin") {
-      history.push("/getUser/" + response.clientID);
+    if (response.code === "loggedin") {
+      console.log(response);
+      history.push("/getUser/" + response.id);
     } else {
       setDisplayAlert(true);
-      if (response.message === "-3") {
+      if (email === "" || senha === "") {
         setAlert("Preencha ambos os campos");
       } else {
-        if (response.message === "-1") {
+        if (response.code === "userdoesntexist") {
           setAlert("Este usuário não existe");
         } else {
-          if (response.message === "-2") {
+          if (response.code === "wrongpassword") {
             setAlert("O email ou senha não estão corretos");
+          } else {
+            if (response === 503) {
+              setAlert(
+                "O servidor está em manutenção. Tente novamente mais tarde"
+              );
+            }
           }
         }
       }

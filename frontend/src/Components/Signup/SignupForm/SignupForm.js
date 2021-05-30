@@ -53,7 +53,10 @@ const LoginForm = () => {
             setAlert("Ambas as senhas devem ser iguais");
           } else {
             setIsLoading(true);
-            let url = "https://app-laut.herokuapp.com/createUser";
+            // cria usuario na tabela mongo
+            //let url = "https://app-laut.herokuapp.com/createUser";
+
+            let url = "https://app-laut-pern.herokuapp.com/createUser";
             let data = {
               email: email,
               senha: senha,
@@ -109,7 +112,8 @@ const LoginForm = () => {
         placeholder="Insira novamente sua senha..."
         value={senha2}
         onChange={(e) => setSenha2(e.target.value)}
-      ></input>{isLoading && (
+      ></input>
+      {isLoading && (
         <div className={styles.imgContainer}>
           <img src={loading} style={{ width: "100px" }}></img>
         </div>
