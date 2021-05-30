@@ -51,7 +51,6 @@ app.post("/authUser", (req, res) => {
         });
       }
 
-      console.log(results.rows)
       if (results.rows[0] === undefined) {
         return res.json({
           code: "userdoesntexist",
