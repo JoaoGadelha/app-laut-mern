@@ -43,8 +43,10 @@ app.post("/authUser", (req, res) => {
       if (error) {
         throw error;
       }
+      
+      console.log(senha === results.rows[0].senha)
 
-      if (results.rows[0] !== undefined && senha === results.rows[0].password) {
+      if (results.rows[0] !== undefined && senha === results.rows[0].senha) {
         return res.status(200).json({
           code: "loggedin",
           message: "Usuário autenticado com sucesso",
@@ -58,7 +60,7 @@ app.post("/authUser", (req, res) => {
         });
       }
 
-      if (results.rows[0] === undefined || senha !== results.rows[0].password) {
+      if (results.rows[0] === undefined || senha !== results.rows[0].senha) {
         return res.json({
           code: "wrongpassword",
           message: "Usuario ou senha errados",
