@@ -48,6 +48,7 @@ app.post("/authUser", (req, res) => {
         return res.status(200).json({
           code: "loggedin",
           message: "Usuário autenticado com sucesso",
+          id: results.rows[0].id
         });
       }
 
